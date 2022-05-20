@@ -10,7 +10,7 @@ MYSQL='mysql --defaults-extra-file=/root/user.cnf --skip-column-names'
 
 for skull in `$MYSQL -e "SHOW DATABASES"`;
 do
-	if [ $skull != "information_schema" ] && [ $skull != "wordpress" ] && [ $skull != "mysql" ] && [ $skull != "sys" ] && [ $skull != "performance_schema" ]; then
+	if [ $skull != "information_schema" ] && [ $skull != "mysql" ] && [ $skull != "sys" ] && [ $skull != "performance_schema" ]; then
 		for table in `$MYSQL $skull -e "SHOW TABLES"`;
 		do	
 		    mkdir -p $skull

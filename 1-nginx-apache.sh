@@ -2,8 +2,8 @@
 # Install Nginx and Apache
 yum -y install epel-release nginx httpd
 # Start Nginx and Apache
-cp /tmp/httpd.conf /etc/httpd/conf/httpd.conf
-cp /tmp/nginx_upstream.conf /etc/nginx/conf.d/
+cp /tmp/homework/httpd.conf /etc/httpd/conf/httpd.conf
+cp /tmp/homework/nginx_upstream.conf /etc/nginx/conf.d/
 systemctl start nginx
 systemctl enable nginx
 systemctl start httpd

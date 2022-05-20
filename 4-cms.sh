@@ -8,5 +8,5 @@ wget https://ru.wordpress.org/latest-ru_RU.zip
 unzip latest-ru_RU.zip
 cp -r /tmp/homework/wordpress/ /var/www/wordpress/
 chmod -R 777 /var/www/wordpress/wp-content
-chown -R apache. wordpress
+chown -R apache. /var/www/wordpress
 systemctl restart httpd

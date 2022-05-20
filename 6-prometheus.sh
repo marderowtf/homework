@@ -26,9 +26,9 @@ ExecStart=/usr/local/bin/node_exporter
 [Install]
 WantedBy=default.target
 EOF
-systemctl daemon-reload
-systemctl start node_exporter
-systemctl enable node_exporter
+#systemctl daemon-reload
+#systemctl start node_exporter
+#systemctl enable node_exporter
 # Prometheus
 # Create User
 useradd --no-create-home --shell /usr/sbin/nologin prometheus
@@ -46,13 +46,13 @@ cat > /etc/prometheus/prometheus.yml <<EOF
 scrape_configs:
   # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
-    
+
     # metrics_path defaults to '/metrics'
     # scheme defaults to 'http'.
-            
+
     static_configs:
     - targets: ['localhost:9090']
-  - job_name: 'nodeexporter' # <-- Добавили
+  - job_name: 'node_exporter' # <-- Добавили
     static_configs:
     - targets: ['localhost:9100']
   - job_name: 'nginx'
@@ -64,24 +64,24 @@ cat > /etc/systemd/system/prometheus.service <<EOF
 Description=Prometheus Monitoring
 Wants=network-online.target
 After=network-online.target
-                                        
+
 [Service]
 User=prometheus
 Group=prometheus
 Type=simple
-ExecStart=/usr/local/bin/prometheus \
---config.file /etc/prometheus/prometheus.yml \
---storage.tsdb.path /var/lib/prometheus/ \
---web.console.templates=/etc/prometheus/consoles \
+ExecStart=/usr/local/bin/prometheus
+--config.file /etc/prometheus/prometheus.yml
+--storage.tsdb.path /var/lib/prometheus/
+--web.console.templates=/etc/prometheus/consoles
 --web.console.libraries=/etc/prometheus/console_libraries
 ExecReload=/bin/kill -HUP $MAINPID
-                                        
+
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl daemon-reload
-systemctl start prometheus
-systemctl enable prometheus
+#systemctl daemon-reload
+#systemctl start prometheus
+#systemctl enable prometheus
 # Grafana
 # Create Repo
 cat > /etc/yum.repos.d/grafana.repo <<EOF
@@ -96,8 +96,13 @@ sslverify=1
 sslcacert=/etc/pki/tls/certs/ca-bundle.crt
 EOF
 # Install
-yum install grafana
+yum -y install grafana
 # Start
 systemctl daemon-reload
+systemctl start node_exporter
+systemctl enable node_exporter
+systemctl start prometheus
+systemctl enable prometheus
 systemctl start grafana-server
 systemctl enable grafana-server
+systemctl disable --now firewalld

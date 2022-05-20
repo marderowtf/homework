@@ -7,7 +7,8 @@ php -v
 wget https://ru.wordpress.org/latest-ru_RU.zip
 unzip latest-ru_RU.zip
 cp -r /tmp/homework/wordpress/ /var/www/wordpress/
-cp -f /tmp/homework/wordpress.conf /etc/httpd/conf.d/welcome.conf
+rm -rf /etc/httpd/conf.d/welcome.conf
+cp /tmp/homework/wordpress.conf /etc/httpd/conf.d/
 chmod -R 777 /var/www/wordpress/wp-content
 chown -R apache. /var/www/wordpress
 systemctl restart httpd

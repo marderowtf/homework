@@ -8,4 +8,4 @@ systemctl start mysqld
 systemctl enable mysqld
 hostnamectl set-hostname mysql-slave
 systemctl restart mysqld
-cp /tmp/my.cnf /etc/
+cp /tmp/homework/my.cnf /etc/

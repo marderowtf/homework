@@ -7,4 +7,4 @@ yum -y --enablerepo=mysql80-community install mysql-community-server
 systemctl start mysqld
 systemctl enable mysqld
 hostnamectl set-hostname mysql-master
-cp /tmp/my.cnf /etc/
+cp /tmp/homework/my.cnf /etc/

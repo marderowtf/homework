@@ -7,3 +7,6 @@ yum -y --enablerepo=mysql80-community install mysql-community-server
 systemctl start mysqld
 systemctl enable mysqld
 hostnamectl set-hostname mysql-master
+systemctl restart mysqld
+systemctl stop firewalld
+systemctl disable firewalld

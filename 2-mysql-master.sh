@@ -10,3 +10,4 @@ hostnamectl set-hostname mysql-master
 systemctl restart mysqld
 systemctl stop firewalld
 systemctl disable firewalld
+grep "A temporary password" /var/log/mysqld.log

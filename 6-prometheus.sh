@@ -44,7 +44,6 @@ chown -Rv prometheus: /usr/local/bin/prom{etheus,tool} /etc/prometheus/ /var/lib
 # Config Prometheus
 cat > /etc/prometheus/prometheus.yml <<EOF
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
   - job_name: 'prometheus'
 
     # metrics_path defaults to '/metrics'
@@ -69,8 +68,7 @@ After=network-online.target
 User=prometheus
 Group=prometheus
 Type=simple
-ExecStart=/usr/local/bin/prometheus
---config.file /etc/prometheus/prometheus.yml \
+ExecStart=/usr/local/bin/prometheus --config.file /etc/prometheus/prometheus.yml \
 --storage.tsdb.path /var/lib/prometheus/ \
 --web.console.templates=/etc/prometheus/consoles \
 --web.console.libraries=/etc/prometheus/console_libraries

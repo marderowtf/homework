@@ -25,6 +25,7 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
+systemctl restart nginx
 systemctl daemon-reload
 systemctl start nginx_prometheus_exporter.service
 systemctl enable nginx_prometheus_exporter.service

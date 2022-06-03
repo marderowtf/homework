@@ -11,4 +11,5 @@ rm -rf /etc/httpd/conf.d/welcome.conf
 cp /tmp/homework/wordpress.conf /etc/httpd/conf.d/
 chmod -R 777 /var/www/wordpress/wp-content
 chown -R apache. /var/www/wordpress
+cp /tmp/homework/wp-config.php /var/www/wordpress/
 systemctl restart httpd

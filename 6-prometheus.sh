@@ -56,7 +56,7 @@ scrape_configs:
     - targets: ['localhost:9100']
   - job_name: 'nginx'
     static_configs:
-    - targets: ['10.67.14.57:9113']
+    - targets: ['192.168.8.12:9113']
 EOF
 cat > /etc/systemd/system/prometheus.service <<EOF
 [Unit]
